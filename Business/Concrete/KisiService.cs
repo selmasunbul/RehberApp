@@ -38,7 +38,7 @@ namespace Business.Concrete
               Adı = entity.Adı,
               SoyAdi = entity.SoyAdi,
               Firma = entity.Firma,
-              İletisimBilgisiId = entity.İletisimBilgisiId
+              IletisimBilgisiId = entity.IletisimBilgisiId
             };
 
             if (await AddAsync(kisi) != null)

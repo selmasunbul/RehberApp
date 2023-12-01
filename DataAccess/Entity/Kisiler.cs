@@ -14,7 +14,7 @@ namespace DataAccess
         [DataMember]
         [Display(Name = "İletisim Bilgisi")]
         [Required]
-        public Guid İletisimBilgisiId { get; set; }
+        public Guid IletisimBilgisiId { get; set; }
 
 
         [Column]
@@ -39,7 +39,7 @@ namespace DataAccess
 
         [NotMapped]
         [DataMember(IsRequired = false)]
-        [ForeignKey("İletisimBilgisiId")]
-        public virtual İletisimBilgisi? İletisimBilgisi { get; set; }
+        [ForeignKey("IletisimBilgisiId")]
+        public virtual IletisimBilgisi?IletisimBilgisi { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace DataAccess
 {
     [DataContract]
     [Table("İletisimBilgisi")]
-    public class İletisimBilgisi: EntityBase
+    public class IletisimBilgisi: EntityBase
     {
         [Column]
         [DataMember]

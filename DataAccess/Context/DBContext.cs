@@ -23,7 +23,7 @@ namespace DataAccess.Context
             #region  BilgiTipi
 
             modelBuilder.Entity<BilgiTipi>()
-               .HasMany(A => A.İletisimBilgileri)
+               .HasMany(A => A.IletisimBilgileri)
                .WithOne(A => A.BilgiTipi)
                .OnDelete(DeleteBehavior.NoAction);
 
@@ -31,9 +31,9 @@ namespace DataAccess.Context
 
             #region  BilgiTipi
 
-            modelBuilder.Entity<İletisimBilgisi>()
+            modelBuilder.Entity<IletisimBilgisi>()
                .HasMany(A => A.Kisiler)
-               .WithOne(A => A.İletisimBilgisi)
+               .WithOne(A => A.IletisimBilgisi)
                .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
