@@ -35,11 +35,8 @@ namespace DataAccess
         [Required]
         public string Firma { get; set; } = "";
 
-
-
         [NotMapped]
-        [DataMember(IsRequired = false)]
-        [ForeignKey("IletisimBilgisiId")]
-        public virtual IletisimBilgisi?IletisimBilgisi { get; set; }
+        [InverseProperty("Kisi")]
+        public virtual ICollection<IletisimBilgisi>? IletisimBilgileri { get; set; }
     }
 }

@@ -31,16 +31,16 @@ namespace DataAccess.Context
 
             #region  BilgiTipi
 
-            modelBuilder.Entity<IletisimBilgisi>()
-               .HasMany(A => A.Kisiler)
-               .WithOne(A => A.IletisimBilgisi)
-               .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<IletisimBilgisi>();
 
             #endregion
 
             #region  Kisi
 
-            modelBuilder.Entity<Kisi>();
+            modelBuilder.Entity<Kisi>()
+               .HasMany(A => A.IletisimBilgileri)
+               .WithOne(A => A.Kisi)
+               .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
         }

@@ -15,6 +15,14 @@ namespace DataAccess
         [Required]
         public Guid BilgiTipiId { get; set; }
 
+
+        [Column]
+        [DataMember]
+        [Display(Name = "Kişi")]
+        [Required]
+        public Guid KisiId { get; set; }
+
+
         [Column]
         [DataMember]
         [Display(Name = "İçerik")]
@@ -22,14 +30,19 @@ namespace DataAccess
         public string İcerik { get; set; } = "";
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+
         [NotMapped]
         [DataMember(IsRequired = false)]
         [ForeignKey("BilgiTipiId")]
         public virtual BilgiTipi? BilgiTipi { get; set; }
 
-        [NotMapped]
-        [InverseProperty("İletisimBilgisi")]
-        public virtual ICollection<Kisi>? Kisiler { get; set; }
 
+        [NotMapped]
+        [DataMember(IsRequired = false)]
+        [ForeignKey("KisiId")]
+        public virtual Kisi? Kisi { get; set; }
     }
 }

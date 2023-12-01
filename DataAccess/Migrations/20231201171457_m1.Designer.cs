@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231201154459_m1")]
+    [Migration("20231201171457_m1")]
     partial class m1
     {
         /// <inheritdoc />
@@ -52,6 +52,43 @@ namespace DataAccess.Migrations
                     b.ToTable("BilgiTipi");
                 });
 
+            modelBuilder.Entity("DataAccess.IletisimBilgisi", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("BilgiTipiId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("KisiId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("İcerik")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BilgiTipiId");
+
+                    b.HasIndex("KisiId");
+
+                    b.ToTable("İletisimBilgisi");
+                });
+
             modelBuilder.Entity("DataAccess.Kisi", b =>
                 {
                     b.Property<Guid>("Id")
@@ -69,6 +106,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("IletisimBilgisiId")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -82,78 +122,38 @@ namespace DataAccess.Migrations
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("İletisimBilgisiId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("İletisimBilgisiId");
 
                     b.ToTable("Kisi");
                 });
 
-            modelBuilder.Entity("DataAccess.İletisimBilgisi", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("BilgiTipiId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("İcerik")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BilgiTipiId");
-
-                    b.ToTable("İletisimBilgisi");
-                });
-
-            modelBuilder.Entity("DataAccess.Kisi", b =>
-                {
-                    b.HasOne("DataAccess.İletisimBilgisi", "İletisimBilgisi")
-                        .WithMany("Kisiler")
-                        .HasForeignKey("İletisimBilgisiId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("İletisimBilgisi");
-                });
-
-            modelBuilder.Entity("DataAccess.İletisimBilgisi", b =>
+            modelBuilder.Entity("DataAccess.IletisimBilgisi", b =>
                 {
                     b.HasOne("DataAccess.BilgiTipi", "BilgiTipi")
-                        .WithMany("İletisimBilgileri")
+                        .WithMany("IletisimBilgileri")
                         .HasForeignKey("BilgiTipiId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("DataAccess.Kisi", "Kisi")
+                        .WithMany("IletisimBilgileri")
+                        .HasForeignKey("KisiId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.Navigation("BilgiTipi");
+
+                    b.Navigation("Kisi");
                 });
 
             modelBuilder.Entity("DataAccess.BilgiTipi", b =>
                 {
-                    b.Navigation("İletisimBilgileri");
+                    b.Navigation("IletisimBilgileri");
                 });
 
-            modelBuilder.Entity("DataAccess.İletisimBilgisi", b =>
+            modelBuilder.Entity("DataAccess.Kisi", b =>
                 {
-                    b.Navigation("Kisiler");
+                    b.Navigation("IletisimBilgileri");
                 });
 #pragma warning restore 612, 618
         }
