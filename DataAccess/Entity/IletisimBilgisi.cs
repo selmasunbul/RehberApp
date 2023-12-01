@@ -1,4 +1,5 @@
 ﻿using DataAccess.Base;
+using DataAccess.Context;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
@@ -29,15 +30,31 @@ namespace DataAccess
         [Required]
         public string İcerik { get; set; } = "";
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-
         [NotMapped]
         [DataMember(IsRequired = false)]
         [ForeignKey("BilgiTipiId")]
         public virtual BilgiTipi? BilgiTipi { get; set; }
+
+
+
+        [NotMapped]
+        public virtual string BilgiTipiAdi => GetBilgiTipiAdi(this.BilgiTipiId);
+
+        private string GetBilgiTipiAdi(Guid bilgiTipiId)
+        {
+            using (DBContext ctx = new DBContext())
+            {
+                var InternalBilgiTipi = ctx.InternalBilgiTipi
+                    .Where(ic => ic.Id == bilgiTipiId)
+                    .Select(x => x.Adı)
+                    .FirstOrDefault();  
+
+                return InternalBilgiTipi ?? ""; 
+            }
+        }
+
+
+
 
 
         [NotMapped]

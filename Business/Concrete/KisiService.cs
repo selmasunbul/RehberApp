@@ -32,22 +32,19 @@ namespace Business.Concrete
 
         public async Task<IServiceOutput<Kisi>> CreateAsync(KisiModel entity)
         {
-
             var kisi = new Kisi
             {
-              Adı = entity.Adı,
-              SoyAdi = entity.SoyAdi,
-              Firma = entity.Firma,
-              IletisimBilgisiId = entity.IletisimBilgisiId
+                Adı = entity.Adı,
+                SoyAdi = entity.SoyAdi,
+                Firma = entity.Firma,
             };
 
             if (await AddAsync(kisi) != null)
-                {
+            {
+                return await ServiceOutput<Kisi>.GenerateAsync(200, true, "Başarılı", data: kisi);
+            }
 
-                    return await ServiceOutput<Kisi>.GenerateAsync(200, true, "Başarılı", data: kisi);
-                }
-
-                return await ServiceOutput<Kisi>.GenerateAsync(200, false, "Başarısız", data: kisi);
+            return await ServiceOutput<Kisi>.GenerateAsync(200, false, "Başarısız", data: kisi);
         }
 
         public async Task<IServiceOutput<List<Kisi>>> RemoveAsync(Guid id)
@@ -63,6 +60,17 @@ namespace Business.Concrete
 
         }
 
+        public async Task<IServiceOutput<Kisi>> GetById(Guid kisiId)
+        {
+            var kisi = await GetAsync(x => x.Id == kisiId);
 
+            if (kisi != null)
+            {
+                return await ServiceOutput<Kisi>.GenerateAsync(200, true, "Başarılı", data: kisi);
+            }
+
+            return await ServiceOutput<Kisi>.GenerateAsync(200, false, "Başarısız");
+
+        }
     }
 }

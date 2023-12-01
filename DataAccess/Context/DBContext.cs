@@ -16,6 +16,11 @@ namespace DataAccess.Context
             _configuration = configuration;
         }
 
+        public virtual DbSet<IletisimBilgisi> InternalIletisimBilgisi { get; set; }
+        public virtual DbSet<BilgiTipi> InternalBilgiTipi { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

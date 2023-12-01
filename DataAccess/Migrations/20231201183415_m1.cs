@@ -32,7 +32,6 @@ namespace DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    IletisimBilgisiId = table.Column<Guid>(type: "uuid", nullable: false),
                     Adı = table.Column<string>(type: "text", nullable: false),
                     SoyAdi = table.Column<string>(type: "text", nullable: false),
                     Firma = table.Column<string>(type: "text", nullable: false),

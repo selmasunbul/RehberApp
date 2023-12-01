@@ -14,7 +14,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -22,6 +22,8 @@ builder.Services.AddDbContext<DBContext>(options =>
              options.UseNpgsql("Host=localhost;Port=5432;Database=Rehber;User Id=postgres;Password=123456;"));
 
 builder.Services.AddScoped<IKisiService, KisiService>();
+builder.Services.AddScoped<IIletisimService, IletisimBilgisiService>();
+builder.Services.AddScoped<IBilgiTipiService, BilgiTipiService>();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddCors(options =>
@@ -34,7 +36,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

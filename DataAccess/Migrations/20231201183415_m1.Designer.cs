@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231201171457_m1")]
+    [Migration("20231201183415_m1")]
     partial class m1
     {
         /// <inheritdoc />
@@ -105,9 +105,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("Firma")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<Guid>("IletisimBilgisiId")
-                        .HasColumnType("uuid");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");

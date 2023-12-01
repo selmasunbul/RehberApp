@@ -8,7 +8,6 @@ namespace DataAccess.ViewModel
 {
     public class KisiModel
     {
-        public Guid IletisimBilgisiId { get; set; }
         public string Adı { get; set; } = "";
         public string SoyAdi { get; set; } = "";
         public string Firma { get; set; } = "";

@@ -15,5 +15,6 @@ namespace Business.Abstract
         Task<IServiceOutput<List<Kisi>>> GetList();
         Task<IServiceOutput<Kisi>> CreateAsync(KisiModel entity);
         Task<IServiceOutput<List<Kisi>>> RemoveAsync(Guid id);
+        Task<IServiceOutput<Kisi>> GetById(Guid kisiId);
     }
 }

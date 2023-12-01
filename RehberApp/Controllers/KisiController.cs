@@ -33,6 +33,15 @@ namespace RehberApp.Controllers
 
         }
 
+        [HttpGet]
+        [Route("get-by-id")]
+        public async Task<IActionResult> GetById(Guid kisiId)
+        {
+
+            IServiceOutput<Kisi> output = await KisiService.GetById(kisiId);
+
+            return await ActionOutput<Kisi>.GenerateAsync(output);
+        }
 
         [HttpDelete]
         [Route("delete")]
