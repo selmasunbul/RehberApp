@@ -1,6 +1,5 @@
 ﻿using Core.Abstract;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
 namespace Core.Helpers
