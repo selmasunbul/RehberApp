@@ -1,3 +1,6 @@
+using DataAccess.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,8 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddDbContext<DBContext>(options =>
-//             options.UseNpgsql("Host=localhost;Port=5432;Database=Rehber;User Id=postgres;Password=123456;"));
+builder.Services.AddDbContext<DBContext>(options =>
+             options.UseNpgsql("Host=localhost;Port=5432;Database=Rehber;User Id=postgres;Password=123456;"));
 
 
 
