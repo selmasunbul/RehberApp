@@ -28,11 +28,30 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Kisi",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Adı = table.Column<string>(type: "text", nullable: false),
+                    SoyAdi = table.Column<string>(type: "text", nullable: false),
+                    Firma = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Kisi", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "İletisimBilgisi",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     BilgiTipiId = table.Column<Guid>(type: "uuid", nullable: false),
+                    KisiId = table.Column<Guid>(type: "uuid", nullable: false),
                     İcerik = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -47,29 +66,10 @@ namespace DataAccess.Migrations
                         column: x => x.BilgiTipiId,
                         principalTable: "BilgiTipi",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Kisi",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    İletisimBilgisiId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Adı = table.Column<string>(type: "text", nullable: false),
-                    SoyAdi = table.Column<string>(type: "text", nullable: false),
-                    Firma = table.Column<string>(type: "text", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Kisi", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Kisi_İletisimBilgisi_İletisimBilgisiId",
-                        column: x => x.İletisimBilgisiId,
-                        principalTable: "İletisimBilgisi",
+                        name: "FK_İletisimBilgisi_Kisi_KisiId",
+                        column: x => x.KisiId,
+                        principalTable: "Kisi",
                         principalColumn: "Id");
                 });
 
@@ -79,22 +79,22 @@ namespace DataAccess.Migrations
                 column: "BilgiTipiId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Kisi_İletisimBilgisiId",
-                table: "Kisi",
-                column: "İletisimBilgisiId");
+                name: "IX_İletisimBilgisi_KisiId",
+                table: "İletisimBilgisi",
+                column: "KisiId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Kisi");
-
-            migrationBuilder.DropTable(
                 name: "İletisimBilgisi");
 
             migrationBuilder.DropTable(
                 name: "BilgiTipi");
+
+            migrationBuilder.DropTable(
+                name: "Kisi");
         }
     }
 }

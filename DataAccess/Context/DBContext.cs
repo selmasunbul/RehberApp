@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace DataAccess.Context
@@ -18,6 +16,11 @@ namespace DataAccess.Context
             _configuration = configuration;
         }
 
+        public virtual DbSet<IletisimBilgisi> InternalIletisimBilgisi { get; set; }
+        public virtual DbSet<BilgiTipi> InternalBilgiTipi { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -25,7 +28,7 @@ namespace DataAccess.Context
             #region  BilgiTipi
 
             modelBuilder.Entity<BilgiTipi>()
-               .HasMany(A => A.İletisimBilgileri)
+               .HasMany(A => A.IletisimBilgileri)
                .WithOne(A => A.BilgiTipi)
                .OnDelete(DeleteBehavior.NoAction);
 
@@ -33,16 +36,16 @@ namespace DataAccess.Context
 
             #region  BilgiTipi
 
-            modelBuilder.Entity<İletisimBilgisi>()
-               .HasMany(A => A.Kisiler)
-               .WithOne(A => A.İletisimBilgisi)
-               .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<IletisimBilgisi>();
 
             #endregion
 
             #region  Kisi
 
-            modelBuilder.Entity<Kisi>();
+            modelBuilder.Entity<Kisi>()
+               .HasMany(A => A.IletisimBilgileri)
+               .WithOne(A => A.Kisi)
+               .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
         }

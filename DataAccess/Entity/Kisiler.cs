@@ -1,4 +1,5 @@
 ﻿using DataAccess.Base;
+using DataAccess.Context;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
@@ -10,11 +11,7 @@ namespace DataAccess
     public class Kisi: EntityBase
     {
 
-        [Column]
-        [DataMember]
-        [Display(Name = "İletisim Bilgisi")]
-        [Required]
-        public Guid İletisimBilgisiId { get; set; }
+
 
 
         [Column]
@@ -35,11 +32,26 @@ namespace DataAccess
         [Required]
         public string Firma { get; set; } = "";
 
-
-
         [NotMapped]
-        [DataMember(IsRequired = false)]
-        [ForeignKey("İletisimBilgisiId")]
-        public virtual İletisimBilgisi? İletisimBilgisi { get; set; }
+        [InverseProperty("Kisi")]
+        public virtual ICollection<IletisimBilgisi>? IletisimBilgileri => GetIletisimBilgileri(this.Id);
+
+        private List<IletisimBilgisi> GetIletisimBilgileri(Guid kisiId)
+        {
+            using (DBContext ctx = new DBContext())
+            {
+                var internalIletisimBilgisiList = ctx.InternalIletisimBilgisi
+                    .Where(ic => ic.KisiId == kisiId)
+                    .ToList();  
+
+                if (internalIletisimBilgisiList != null && internalIletisimBilgisiList.Any())
+                {
+                    return internalIletisimBilgisiList;
+                }
+
+                return new List<IletisimBilgisi>(); 
+            }
+        }
+
     }
 }

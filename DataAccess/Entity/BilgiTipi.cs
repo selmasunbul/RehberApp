@@ -17,7 +17,7 @@ namespace DataAccess
 
         [NotMapped]
         [InverseProperty("BilgiTipi")]
-        public virtual ICollection<İletisimBilgisi>? İletisimBilgileri { get; set; }
+        public virtual ICollection<IletisimBilgisi>? IletisimBilgileri { get; set; }
 
     }
 }
