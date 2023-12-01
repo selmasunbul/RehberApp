@@ -33,15 +33,6 @@ namespace RehberApp.Controllers
 
         }
 
-        [HttpGet]
-        [Route("get-list")]
-        public async Task<IActionResult> GetList()
-        {
-
-            IServiceOutput<List<Kisi>> output = await KisiService.GetList();
-
-            return await ActionOutput<Kisi>.GenerateAsync(output);
-        }
 
         [HttpDelete]
         [Route("delete")]
@@ -52,5 +43,18 @@ namespace RehberApp.Controllers
 
             return await ActionOutput<List<Kisi>>.GenerateAsync(output);
         }
+
+
+        [HttpGet]
+        [Route("get-list")]
+        public async Task<IActionResult> GetList()
+        {
+
+            IServiceOutput<List<Kisi>> output = await KisiService.GetList();
+
+            return await ActionOutput<Kisi>.GenerateAsync(output);
+        }
+
+
     }
 }
