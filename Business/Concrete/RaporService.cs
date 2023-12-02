@@ -79,7 +79,18 @@ namespace Business.Concrete
 
         }
 
+        public async Task<IServiceOutput<Rapor>> GetById(Guid raporId)
+        {
+            var raporDetail = await GetAsync(x => x.Id == raporId);
 
+            if (raporDetail != null)
+            {
+                return await ServiceOutput<Rapor>.GenerateAsync(200, true, "Başarılı", data: raporDetail);
+            }
+
+            return await ServiceOutput<Rapor>.GenerateAsync(200, false, "Başarısız");
+
+        }
 
     }
 }

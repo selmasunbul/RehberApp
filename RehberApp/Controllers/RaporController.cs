@@ -42,5 +42,18 @@ namespace RehberApp.Controllers
 
             return await ActionOutput<List<Rapor>>.GenerateAsync(output);
         }
+
+
+        [HttpGet]
+        [Route("get-by-id")]
+        public async Task<IActionResult> GetById(Guid raporId)
+        {
+
+            IServiceOutput<Rapor> output = await RaporService.GetById(raporId);
+
+            return await ActionOutput<Rapor>.GenerateAsync(output);
+        }
+
+
     }
 }

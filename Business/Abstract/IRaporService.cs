@@ -15,5 +15,6 @@ namespace Business.Abstract
     {
         Task<IServiceOutput<RaporModel>> GetRequestRapor(Guid iletisimBilgiTipiId, string icerik);
         Task<IServiceOutput<List<Rapor>>> GetList();
+        Task<IServiceOutput<Rapor>> GetById(Guid raporId);
     }
 }
