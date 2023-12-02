@@ -72,5 +72,8 @@ namespace Business.Concrete
             return await ServiceOutput<Kisi>.GenerateAsync(200, false, "Başarısız");
 
         }
+
+
+
     }
 }

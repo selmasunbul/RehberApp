@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Entity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace DataAccess.Context
@@ -42,10 +43,7 @@ namespace DataAccess.Context
 
             #region  Kisi
 
-            modelBuilder.Entity<Kisi>()
-               .HasMany(A => A.IletisimBilgileri)
-               .WithOne(A => A.Kisi)
-               .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Rapor>();
 
             #endregion
         }

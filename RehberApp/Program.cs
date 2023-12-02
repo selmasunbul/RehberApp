@@ -24,6 +24,7 @@ builder.Services.AddDbContext<DBContext>(options =>
 builder.Services.AddScoped<IKisiService, KisiService>();
 builder.Services.AddScoped<IIletisimService, IletisimBilgisiService>();
 builder.Services.AddScoped<IBilgiTipiService, BilgiTipiService>();
+builder.Services.AddScoped<IRaporService, RaporService>();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddCors(options =>

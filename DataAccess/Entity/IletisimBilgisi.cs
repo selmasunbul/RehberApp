@@ -53,10 +53,6 @@ namespace DataAccess
             }
         }
 
-
-
-
-
         [NotMapped]
         [DataMember(IsRequired = false)]
         [ForeignKey("KisiId")]
