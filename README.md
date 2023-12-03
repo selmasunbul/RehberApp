@@ -7,5 +7,6 @@ consoleapp' de ise kuyruga atılan rapor durumları okunur.
 
  rapor talebi için girilmesi gereken parametreler bilgi tipi : konum => burada bilgi tipleri getlist methotundan konum 
 bilgi tipinin id'si ve talep olunacak konum içeriği (örn: kayseri) girilmelidir, girilen parametrelere göre rehber servisine client ile baglanıp  rapor oluşturur ve rapor bilgilerini resutl'ta kullanıcıya sunar. bu sırada rapor talebi gerçekleştiğinde kuyruga hazırlanıyor ve rapor sonucu geldıgınde  kuyruga tamamlandı mesajı atar
+diğer methotlar standart crud işlemlerini içerir
 
 cosoleApp te ise kuruk mesajlarını görüntüleyebiliriz.
